@@ -2,35 +2,50 @@ package main;
 
 public abstract class InputMode {
 	
-	public static final InputMode WSIK = new InputMode() {
+	public static final InputMode KEYBOARD = new InputMode() {
 		@Override
 		public double[] getSpeeds() {
 			MainWindow window = Main.window;
 			
-			int left, right;
+			int leftUD, leftLR, rightUD, rightLR;
 			
 			
 			if(window.getKeysPressed().contains(new Character('w'))) {
-				left = 1;
+				leftUD = 1;
 			} else if(window.getKeysPressed().contains(new Character('s'))) {
-				left = -1;
+				leftUD = -1;
 			} else {
-				left = 0;
+				leftUD = 0;
+			}
+			
+			if(window.getKeysPressed().contains(new Character('a'))) {
+				leftLR = -1;
+			} else if(window.getKeysPressed().contains(new Character('d'))) 
+			{
+				leftLR = 1;
+			} else {
+				leftLR = 0;
 			}
 			
 			if(window.getKeysPressed().contains(new Character('i'))) {
-				right = 1;
+				rightUD = 1;
 			} else if(window.getKeysPressed().contains(new Character('k'))) {
-				right = -1;
+				rightUD = -1;
 			} else {
-				right = 0;
+				rightUD = 0;
 			}
 			
-			return new double[] {left, right};
+			if(window.getKeysPressed().contains(new Character('j'))) {
+				rightLR = -1;
+			} else if(window.getKeysPressed().contains(new Character('l'))) {
+				rightLR = 1;
+			} else {
+				rightLR = 0;
+			}
+			
+			return new double[] {leftUD, leftLR, rightUD, rightLR};
 		}
 	};
-	
-	
 	
 	public abstract double[] getSpeeds();
 }

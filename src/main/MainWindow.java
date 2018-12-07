@@ -119,7 +119,7 @@ public class MainWindow extends JFrame {
 					if(cycle>=1.0) {
 						cycle = 0.0f;
 					}
-					if(saturation<0.2) {
+					if(saturation<0.3) {
 						saturation +=0.01;
 					}
 					try {Thread.sleep(40);} catch(Exception e) {System.exit(0);}

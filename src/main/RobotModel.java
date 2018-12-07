@@ -17,7 +17,7 @@ public class RobotModel {
 	private double maxSpeed; //in ft/ms
 	private MainWindow frame;
 	private DriveMode drive = DriveMode.TANK_DRIVE;
-	private InputMode input = InputMode.WSIK;
+	private InputMode input = InputMode.KEYBOARD;
 	
 	private RobotPosition nextPos;
 	
