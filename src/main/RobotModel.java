@@ -16,7 +16,7 @@ public class RobotModel {
 	
 	private double maxSpeed; //in ft/ms
 	private DriveMode drive = DriveMode.ARCADE_DRIVE;
-	private InputMode input = InputMode.KEYBOARD;
+	private InputMode input;
 	
 	private RobotPosition nextPos;
 	
@@ -30,6 +30,8 @@ public class RobotModel {
 		updateHypot();
 		
 		this.maxSpeed = maxSpeed/40;
+		
+		input = new InputMode.Keyboard('w', 'a', 's', 'd', 'i', 'j', 'k', 'l');
 	}
 	
 	public RobotModel() {}

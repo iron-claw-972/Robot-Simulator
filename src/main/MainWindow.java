@@ -20,7 +20,7 @@ public class MainWindow extends JFrame {
 	private JMenuBar menuBar;
 	private JMenu stageMenu;
 	private JCheckBoxMenuItem wallCollisionMenuItem;
-	private JMenu robotMenu;
+	private JPopupMenu robotPopupMenu;
 	private JMenuItem robotColorMenuItem;
 	private JMenu robotDriveMenu;
 	private JRadioButtonMenuItem tankDriveMenuItem;
@@ -39,6 +39,16 @@ public class MainWindow extends JFrame {
 		
 		//Paint the Robot on the JPanel
 		pane = new JPanel() {
+			{
+				addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent e) {
+						if(robot.getPolygon().contains(e.getPoint()) && SwingUtilities.isRightMouseButton(e)) {
+							robotPopupMenu.show(MainWindow.this, e.getX()+5, e.getY()+5+robotPopupMenu.getHeight()/2);
+						};
+					}
+				});
+			}
+			
 			@Override
 			public void paint(Graphics g) {
 				super.paint(g);
@@ -175,8 +185,7 @@ public class MainWindow extends JFrame {
 		});
 		stageMenu.add(wallCollisionMenuItem);
 		
-		robotMenu = new JMenu("Robot");
-		menuBar.add(robotMenu);
+		robotPopupMenu = new JPopupMenu("Robot");
 		
 		robotColorMenuItem = new JMenuItem("Change Color");
 		robotColorMenuItem.addActionListener(new ActionListener() {
@@ -184,7 +193,7 @@ public class MainWindow extends JFrame {
 				robotColor = JColorChooser.showDialog(MainWindow.this, "Choose Robot Color", robotColor);
 			}
 		});
-		robotMenu.add(robotColorMenuItem);
+		robotPopupMenu.add(robotColorMenuItem);
 		
 		robotDriveMenu = new JMenu("Drive Mode");
 		tankDriveMenuItem = new JRadioButtonMenuItem("Tank Drive");
@@ -205,7 +214,7 @@ public class MainWindow extends JFrame {
 		});
 		robotDriveMenu.add(tankDriveMenuItem);
 		robotDriveMenu.add(arcadeDriveMenuItem);
-		robotMenu.add(robotDriveMenu);
+		robotPopupMenu.add(robotDriveMenu);
 		
 		maxSpeedMenuItem = new JMenuItem("Change Max Speed");
 		maxSpeedMenuItem.addActionListener(new ActionListener() {
@@ -222,7 +231,7 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
-		robotMenu.add(maxSpeedMenuItem);
+		robotPopupMenu.add(maxSpeedMenuItem);
 		
 		dimensionsMenuItem = new JMenuItem("Change Dimensions");
 		dimensionsMenuItem.addActionListener(new ActionListener() {
@@ -248,7 +257,7 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
-		robotMenu.add(dimensionsMenuItem);
+		robotPopupMenu.add(dimensionsMenuItem);
 		
 		setJMenuBar(menuBar);
 	}
